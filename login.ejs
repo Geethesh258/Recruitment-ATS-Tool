@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATS Recruitment Tool</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #f3f4f7, #ffffff);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #4caf50;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #4caf50;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.8rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #4caf50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+      background: #4caf50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to the ATS Recruitment Tool</h1>
+  </header>
+  
+  <main>
+    <h2>Login</h2>
+    <p>Please enter your username and password to access the dashboard.</p>
+    <form action="/login" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+      <a href="#" class="link">Forgot your password?</a>
+    </form>
+  </main>
+  
+  <footer>
+    &copy; 2025 ATS Recruitment Tool. All rights reserved.
+  </footer>
+</body>
+</html>

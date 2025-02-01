@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #d16ba5; /* Pinkish purple background */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Styling */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.w3schools.com/w3images/workplace.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(15px);
+            z-index: -1;
+            animation: slideBackground 15s ease-in-out infinite;
+        }
+
+        @keyframes slideBackground {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-5%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(0, 0, 0, 0.8); /* Dark translucent background for form */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            animation: fadeInUp 2s ease-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Label Styling */
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #fff;
+            margin-top: 1rem;
+        }
+
+        /* Input Fields Styling */
+        input[type="text"], input[type="email"], input[type="file"] {
+            padding: 0.8rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus {
+            border-color: #74ebd5;
+            box-shadow: 0 0 8px rgba(116, 235, 213, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Submit Button Styling */
+        button {
+            padding: 1rem 2.5rem;
+            background-color: #74ebd5;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #3b3b3b;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="background"></div>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <h1>Upload Resume</h1>
+        <form action="/upload-resume" method="POST" enctype="multipart/form-data">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="skills">Skills (comma-separated):</label>
+            <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, HTML, CSS" required><br>
+
+            <label for="resume">Resume (PDF, DOCX, etc.):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.docx,.doc" required><br>
+
+            <button type="submit">Upload Resume</button>
+        </form>
+    </div>
+
+</body>
+</html>

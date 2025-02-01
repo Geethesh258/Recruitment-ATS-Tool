@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Resumes</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Soft gradient background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: auto;
+            text-align: center;
+        }
+
+        /* Background Animation */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://your-image-url.com/image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: slideBackground 15s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes slideBackground {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-10%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        input[type="text"] {
+            padding: 1rem;
+            margin: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            width: 300px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus {
+            transform: scale(1.05);
+            border-color: #74ebd5;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            background-color: #74ebd5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #3b3b3b;
+            transform: scale(1.1);
+        }
+
+        hr {
+            width: 100%;
+            max-width: 600px;
+            border-top: 2px solid #ccc;
+            margin: 2rem 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Styles for Result List */
+        .result-list {
+            width: 80%;
+            max-width: 900px;
+            margin-top: 2rem;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Light background for better readability */
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        li:hover {
+            background-color: #f1f1f1;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        a {
+            color: #74ebd5;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animation -->
+    <div class="background"></div>
+
+    <h1>Search Resumes</h1>
+    <form action="/search" method="POST">
+        <input type="text" name="query" placeholder="Search (e.g., Java AND Python)" required>
+        <button type="submit">Search</button>
+    </form>
+    <hr>
+
+    <h2>Results:</h2>
+    <% if (message) { %>
+        <p><%= message %></p>
+    <% } else { %>
+        <% if (results.length === 0) { %>
+            <p>No candidate found matching the search criteria.</p>
+        <% } else { %>
+            <div class="result-list">
+                <ul>
+                    <% results.forEach(candidate => { %>
+                        <li>
+                            <strong>Name:</strong> <%= candidate.name %> <br>
+                            <strong>Email:</strong> <%= candidate.email %> <br>
+                            <strong>Skills:</strong> <%= candidate.skills %> <br>
+                            <a href="<%= candidate.resume_file_url %>" target="_blank">View Resume</a>
+                            <button onclick="viewInExcel('<%= candidate.id %>')">View in Excel</button>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+    <% } %>
+
+    <script>
+        function viewInExcel(candidateId) {
+            fetch(`/view-in-excel?candidateId=${candidateId}`)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>
